@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
-   def create
+  before_action :authenticate_user!, only: [:update]
+  
+  def create
     build_resource(sign_up_params)
     
     if resource.save
@@ -13,6 +13,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def update
+    super do |resource|
+      if resource.errors.empty?
+        render json: { message: 'Atualização bem-sucedida' }, status: :ok and return
+      else
+        render json: { errors: resource.errors.full_messages }, status: :unprocessable_entity and return
+      end
+    end
+    
+  end
+  
   private
 
   def sign_up_params
