@@ -49,3 +49,6 @@ end
 gem "devise", "~> 4.9"
 
 gem "devise-jwt", "~> 0.12.1"
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem "omniauth-rails_csrf_protection"
