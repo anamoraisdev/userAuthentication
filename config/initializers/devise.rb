@@ -20,8 +20,20 @@ Devise.setup do |config|
     jwt.secret = Rails.application.credentials.jwt_secret_key!
     jwt.dispatch_requests = [
       ['POST', %r{^/users/sign_in$}],
+      ['GET', %r{^/users/auth/google_oauth2/callback$}],
     ]
   end
+
+  config.omniauth :google_oauth2,  Rails.application.credentials.google_client_id ,  Rails.application.credentials.google_client_secret, {
+    scope: 'email, profile',
+    prompt: 'select_account',
+    image_aspect_ratio: 'square',
+    image_size: 50,
+    access_type: 'offline'
+  }
+  
+  OmniAuth.config.allowed_request_methods = [:post, :get]
+  OmniAuth.config.silence_get_warning = true
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
@@ -103,7 +115,7 @@ Devise.setup do |config|
   # Notice that if you are skipping storage for all authentication paths, you
   # may want to disable generating routes to Devise's sessions controller by
   # passing skip: :sessions to `devise_for` in your config/routes.rb
-  config.skip_session_storage = [:http_auth]
+  config.skip_session_storage = [:http_auth, :params_auth]
 
   # By default, Devise cleans up the CSRF token on authentication to
   # avoid CSRF token fixation attacks. This means that, when using AJAX

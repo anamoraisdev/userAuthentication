@@ -4,6 +4,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
 
+  def google_oauth2
+    user = User.from_omniauth(request.env["omniauth.auth"])
+    if user.persisted?
+      token = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first
+      redirect_to "http://localhost:3000/signin?token=#{token}"
+    else
+      return render json: { error: "Failed to register user." }, status: :ok
+    end
+  end
+
   # You should also create an action method in this controller like this:
   # def twitter
   # end
