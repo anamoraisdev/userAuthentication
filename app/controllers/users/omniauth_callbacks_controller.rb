@@ -8,7 +8,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     user = User.from_omniauth(request.env["omniauth.auth"])
     if user.persisted?
       token = Warden::JWTAuth::UserEncoder.new.call(user, :user, nil).first
-      redirect_to "http://localhost:3000/signin?token=#{token}"
+      redirect_to "http://localhost:3000/login?token=#{token}"
     else
       return render json: { error: "Failed to register user." }, status: :ok
     end
