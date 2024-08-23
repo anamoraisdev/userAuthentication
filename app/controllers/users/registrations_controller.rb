@@ -5,8 +5,8 @@ class Users::RegistrationsController < Devise::RegistrationsController
   
   def create
     build_resource(sign_up_params)
-    
-    if resource.save
+    @user = resource
+    if @user.save
       render json: { message: 'User registered successfully.'}, status: :created
     else
       render json: { error: resource.errors.full_messages.join(', ') }, status: :unprocessable_entity
