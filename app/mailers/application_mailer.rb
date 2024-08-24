@@ -10,7 +10,7 @@ class ApplicationMailer < ActionMailer::Base
         personalization = Personalization.new
         personalization.add_to(Email.new(email: user.email, name: "Ana Karolina"))
         personalization.add_dynamic_template_data(
-            'link' => "http://localhost:4000/resource/confirmation?confirmation_token=abcdef"
+            'link' => "http://localhost:4000/users/confirmation?confirmation_token=#{token}"
         )
         mail.add_personalization(personalization)
         puts mail.to_json
