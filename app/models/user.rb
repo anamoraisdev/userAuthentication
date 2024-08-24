@@ -6,9 +6,9 @@ class User < ApplicationRecord
   validates :address, presence: false
 
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :validatable, 
-  :jwt_authenticatable, jwt_revocation_strategy: self  
-  
+  :recoverable, :rememberable, :validatable, :confirmable,
+  :jwt_authenticatable, jwt_revocation_strategy: self
+
   devise :omniauthable, omniauth_providers: [:google_oauth2]
 
   def self.from_omniauth(auth)
