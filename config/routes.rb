@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   }
 
   resources :favorites, only: [:create, :destroy, :index]
+  resources :orders, only: [:create, :show, :index]
 
   get '/me', to: 'tokens#me'
 end

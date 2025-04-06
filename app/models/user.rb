@@ -3,6 +3,10 @@ class User < ApplicationRecord
 
   has_many :favorites, dependent: :destroy
   has_many :favorite_products, through: :favorites, source: :product
+  has_many :orders
+
+  has_many :coupon_usages
+  has_many :used_coupons, through: :coupon_usages, source: :coupon
   
   validates :name, presence: false
   validates :birthdate, presence: false
