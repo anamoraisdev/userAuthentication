@@ -57,3 +57,5 @@ gem "rack-cors", "~> 2.0"
 gem 'sendgrid-ruby'
 gem 'rswag'
 gem 'rspec-rails'
+gem 'rails_admin', '~> 3.0'
+gem "sassc-rails"
