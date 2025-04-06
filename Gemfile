@@ -55,3 +55,5 @@ gem "omniauth-rails_csrf_protection"
 gem "rack-cors", "~> 2.0"
 
 gem 'sendgrid-ruby'
+gem 'rswag'
+gem 'rspec-rails'
