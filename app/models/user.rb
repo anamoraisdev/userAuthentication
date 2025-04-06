@@ -1,5 +1,8 @@
 class User < ApplicationRecord
   include Devise::JWT::RevocationStrategies::JTIMatcher
+
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_products, through: :favorites, source: :product
   
   validates :name, presence: false
   validates :birthdate, presence: false

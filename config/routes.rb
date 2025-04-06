@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     confirmations: 'users/confirmations'
   }
 
+  resources :favorites, only: [:create, :destroy, :index]
+
   get '/me', to: 'tokens#me'
 end
