@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :categories
+  resources :products
   mount Rswag::Ui::Engine => '/api-docs'
   mount Rswag::Api::Engine => '/api-docs'
 
@@ -7,7 +9,6 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
     omniauth_callbacks: 'users/omniauth_callbacks' ,
     confirmations: 'users/confirmations'
-    
   }
 
   get '/me', to: 'tokens#me'
